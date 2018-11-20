@@ -2,34 +2,45 @@ import { GraphQLServer } from 'graphql-yoga';
 
 const typeDefs = `
     type Query {
+        me: User!
+        post: Post!
+    }
+
+    type User {
         id: ID!
         name: String!
-        age: Int!
-        employed: Boolean!
-        gpa: Float
+        email: String!
+        age: Int
+    }
+
+    type Post {
+        id: ID!
+        title: String!
+        body: String!
+        published: Boolean!
     }
 `;
 
 const resolvers = {
     Query: {
-        id() {
-            return 'ABC123'
+        me() {
+            return {
+                id: 'ABC123',
+                name: 'Me',
+                email: 'me@mail.com'
+            };
         },
-        name() {
-            return 'Mario Zamora'
+        post() {
+            return {
+                id: 'ABC456',
+                title: 'post 1',
+                body: 'body 1',
+                published: true
+            };
         },
-        age() {
-            return 31
-        },
-        employed() {
-            return true
-        },
-        gpa() {
-            return null
-        }
     }
 };
 
 const server = new GraphQLServer({ typeDefs, resolvers });
 
-server.start(() => console.log(`SERVER RUNNING ON PORT: 4000`) )
+server.start(() => console.log(`SERVER RUNNING ON PORT: 4000`));
