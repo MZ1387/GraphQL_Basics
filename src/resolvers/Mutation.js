@@ -181,8 +181,10 @@ export default {
         db.comments.push(comment);
 
         pubsub.publish(`comment: ${args.data.post}`, {
-            mutation: 'CREATED',
-            data: comment
+            comment: {
+                mutation: 'CREATED',
+                data: comment
+            }
         });
 
         return comment;
@@ -197,8 +199,10 @@ export default {
         const [deletedComment] = db.comments.splice(commentIndex, 1);
 
         pubsub.publish(`comment: ${deletedComment.post}`, {
-            mutation: 'DELETED',
-            data: deletedComment
+            comment: {
+                mutation: 'DELETED',
+                data: deletedComment
+            }
         });
 
         return deletedComment;
@@ -216,8 +220,10 @@ export default {
         }
 
         pubsub.publish(`comment: ${comment.post}`, {
-            mutation: 'UPDATED',
-            data: comment
+            comment: {
+                mutation: 'UPDATED',
+                data: comment
+            }
         });
 
         return comment;
