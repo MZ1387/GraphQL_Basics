@@ -1,4 +1,4 @@
-# Node_GraphQL-Basics
+# GraphQL_Basics
 
 An API to learn the fundamentals of GraphQL.
 
